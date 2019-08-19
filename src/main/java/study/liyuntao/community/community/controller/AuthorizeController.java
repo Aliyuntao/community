@@ -1,5 +1,6 @@
 package study.liyuntao.community.community.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
-
+@Slf4j
 @Controller
 public class AuthorizeController {
     @Autowired
@@ -54,6 +55,7 @@ public class AuthorizeController {
             response.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {
+            log.error("callback get github error,{}",githubUser);
             return "redirect:/";
 
         }
