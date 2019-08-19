@@ -1,7 +1,8 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-
+logs/
+src/main/resources/application.properties
 ### STS ###
 .apt_generated
 .classpath
