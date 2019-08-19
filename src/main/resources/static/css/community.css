@@ -1,24 +1,128 @@
-body{
+body {
     background-color: #efefef;
 }
-.publish{
+.header-body{
+    background-color: #28a4c9;
+}
+.publish {
     margin: 60px;
     background-color: white;
 }
-.submitButton{
+
+.submitButton {
+    margin-top: 10px;
     margin-bottom: 15px;
     float: right;
 }
-.index{
+
+.index {
     margin: 60px;
     background-color: white;
 }
-.question-desc{
-    font-size:12px ;
+
+.question-desc {
+    font-size: 12px;
     font-weight: normal;
     color: #999;
 }
-.a-menu{
+
+.question-related {
+    line-height: 30px;
+    font-size: 18px;
+    padding-left: 0;
+    list-style: none;
+
+}
+
+.a-menu {
     color: #999;
     font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.comment-list {
+    color: #999999;
+}
+
+.comment-list .icon {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.comments {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+
+}
+
+.comments-out {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-selection {
+    margin-top: 0px;
+}
+
+.comment-input {
+    margin-top: 15px;
+}
+
+.question-title {
+    margin-top: 25px;
+}
+
+.question-tag {
+    margin-right: 15px;
+    margin-bottom: 10px;
+    white-space: normal;
+    display: inline-block;
+}
+
+.comment-list .icon:hover {
+    color: #2e6da4;
+}
+
+.comment-list .active {
+    color: #2e6da4;
+}
+
+.two-comment {
+    border-radius: 10px;
+    margin-top: 15px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+.media-object {
+    height: 40px;
+    width: 40px;
+}
+
+.solid {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.point {
+    cursor: pointer;
+}
+.tag-div{
+    padding-top: 10px;
+}
+.span-text{
+    max-width: 5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.foot{
+    padding: 15px 25%;
+    color: #666;
 }

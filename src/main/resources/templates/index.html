@@ -2,14 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>学习社区</title>
+    <title>南大论坛</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet"  href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet"  href="css/community.css" />
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/community.js" type="application/javascript"></script>
 
 </head>
+<script type="application/javascript">
+window.onload = function () {
+    var closable = window.localStorage.getItem("closable");
+    if(closable == "true"){
+        window.close();
+        window.localStorage.removeItem("closable");
+    }
+}
+</script>
 <body>
 <div th:insert="~{header :: nav}"></div>
 <div class="container-fluid index">
@@ -17,7 +27,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true">发现</span></h2>
             <hr>
-            <div class="media" th:each="question:${pagination.questions}">
+            <div class="media" th:each="question:${pagination.data}">
                 <div class="media-left ">
                     <a href="#">
                         <img class="img-rounded" th:src="${question.user.avatarUrl}" alt="..." style="
@@ -30,13 +40,41 @@
                     <h4 class="media-heading">
                         <a style="color: #0f0f0f" th:href = "@{'/question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
-                    <span th:text="${question.description}"></span><br>
+                    <span class="span-text" th:text="${question.description}" ></span><br>
                     <span class="question-desc"> <span th:text="${question.commentCount}"></span>个回复 • <span th:text="${question.viewCount}" ></span> 次浏览 • </span>
                     <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
                 </div>
             </div>
 
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" th:if="${search != null}">
+                <ul class="pagination">
+                    <li th:if="${pagination.showFirstPage}">
+                        <a th:href="@{/(page=${pagination.firstPage},search=${search})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+
+                    <li th:if="${pagination.showPre}" >
+                        <a th:href="@{/(page=${pagination.page - 1},search=${search})}" aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+                    <li th:each="showPage:${pagination.pages}" th:class = "${pagination.page == showPage} ? 'active':''"><a
+                            th:href = "@{/(page=${showPage},search=${search})}" th:text="${showPage}"
+                           ></a></li>
+                    <li th:if="${pagination.showNext}">
+                        <a th:href="@{/(page=${pagination.page + 1},search=${search})}" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    <li th:if="${pagination.showEndPage}">
+                        <a th:href="@{/(page=${pagination.totalPage},search=${search})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav aria-label="Page navigation" th:if="${search == null}">
                 <ul class="pagination">
                     <li th:if="${pagination.showFirstPage}">
                         <a th:href="@{/(page=${pagination.firstPage})}" aria-label="Previous">
@@ -50,7 +88,7 @@
                     </li>
                     <li th:each="showPage:${pagination.pages}" th:class = "${pagination.page == showPage} ? 'active':''"><a
                             th:href = "@{/(page=${showPage})}" th:text="${showPage}"
-                           ></a></li>
+                    ></a></li>
                     <li th:if="${pagination.showNext}">
                         <a th:href="@{/(page=${pagination.page + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
@@ -74,7 +112,7 @@
         </div>
     </div>
 </div>
-
+<div th:insert="~{footer :: foot}"></div>
 
 
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">

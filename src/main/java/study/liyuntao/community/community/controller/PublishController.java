@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import study.liyuntao.community.community.cache.TagCache;
 import study.liyuntao.community.community.dto.QuestionDTO;
 import study.liyuntao.community.community.model.Question;
 import study.liyuntao.community.community.model.User;
@@ -20,18 +21,20 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id") Integer id,
+    public String edit(@PathVariable(name = "id") Long id,
                        Model model) {
         QuestionDTO question = questionService.getById(id);
         model.addAttribute("description", question.getDescription());
         model.addAttribute("title", question.getTitle());
         model.addAttribute("tag", question.getTag());
+        model.addAttribute("tags", TagCache.get());
 
         return "publish";
     }
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -39,12 +42,12 @@ public class PublishController {
     public String doPublish(@RequestParam("title") String title,
                             @RequestParam("description") String description,
                             @RequestParam("tag") String tag,
-                            @RequestParam(name = "id", required = false) Integer id,
+                            @RequestParam(name = "id", required = false) Long id,
                             HttpServletRequest request,
                             Model model) {
 
         User user = (User) request.getSession().getAttribute("user");
-
+        model.addAttribute("tags", TagCache.get());
         if (user == null) {
             model.addAttribute("error", "用户未登录");
             return "publish";

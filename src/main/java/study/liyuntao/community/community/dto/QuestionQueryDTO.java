@@ -10,7 +10,7 @@ import lombok.Data;
  * Description: 用于搜索实现
  */
 @Data
-public class QusetionQueryDTO {
+public class QuestionQueryDTO {
     private String search;
     private Integer page;
     private Integer size;

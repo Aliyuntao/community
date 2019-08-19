@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import study.liyuntao.community.community.mapper.NotificationMapper;
 import study.liyuntao.community.community.mapper.UserMapper;
 import study.liyuntao.community.community.model.User;
 import study.liyuntao.community.community.model.UserExample;
+import study.liyuntao.community.community.service.NotificationService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,6 +44,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     List<User> users = userMapper.selectByExample(userExample);
                     if (users.size() != 0) {
                         request.getSession().setAttribute("user", users.get(0));
+                        Long unReadCount = notificationService.unReadCount(users.get(0).getId());
+                        request.getSession().setAttribute("unreadCount",unReadCount);
                     }
                     break;
                 }

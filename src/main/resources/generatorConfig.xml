@@ -4,13 +4,12 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
-        <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/test"
-                        userId="sa"
-                        password="123">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/community"
+                        userId="root"
+                        password="12345">
         </jdbcConnection>
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
@@ -30,5 +29,7 @@
         </javaClientGenerator>
         <table tableName="user" domainObjectName="User" ></table>
         <table tableName="question" domainObjectName="Question" ></table>
+        <table tableName="comment" domainObjectName="Comment" ></table>
+        <table tableName="notification" domainObjectName="Notification" ></table>
     </context>
 </generatorConfiguration>

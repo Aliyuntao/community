@@ -7,5 +7,17 @@ package study.liyuntao.community.community.enums;
  * Time: 10:55
  * Description: No Description
  */
-public class CommentTypeEnum {
+public enum CommentTypeEnum {
+    QUESTION(1),
+    COMMENT(2);
+
+    private Integer type;
+
+    CommentTypeEnum(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getType(){
+        return type;
+    }
 }

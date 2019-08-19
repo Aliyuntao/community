@@ -10,7 +10,7 @@ import lombok.Data;
  * Description: No Description
  */
 @Data
-public class CommentDTO {
+public class CommentCreateDTO {
     private Long parentId;
     private String content;
     private Integer type;

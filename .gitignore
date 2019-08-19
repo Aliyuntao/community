@@ -1,4 +1,5 @@
 HELP.md
+community.vpp.*
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 logs/
@@ -17,6 +18,7 @@ src/main/resources/application.properties
 *.iws
 *.iml
 *.ipr
+*.properties
 
 ### NetBeans ###
 /nbproject/private/

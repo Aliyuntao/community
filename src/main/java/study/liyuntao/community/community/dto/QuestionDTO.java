@@ -5,15 +5,15 @@ import study.liyuntao.community.community.model.User;
 
 @Data
 public class QuestionDTO {
-    private Integer id;
+    private Long id;
     private String description;
     private String title;
     private String tag;
     private Long gmtCreate;
     private Long gmtModified;
-    private Integer creator;
-    private Integer commentCount;
-    private Integer viewCount;
-    private Integer likeCount;
+    private Long creator;
+    private Long commentCount;
+    private Long viewCount;
+    private Long likeCount;
     private User user;
 }

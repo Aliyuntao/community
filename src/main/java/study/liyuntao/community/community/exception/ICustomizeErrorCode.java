@@ -8,4 +8,6 @@ package study.liyuntao.community.community.exception;
  * Description: No Description
  */
 public interface ICustomizeErrorCode {
+   String getMessage();
+   Integer getCode();
 }

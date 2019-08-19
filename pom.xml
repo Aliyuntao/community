@@ -41,31 +41,38 @@
         </dependency>
         <!--引入热部署 -->
         <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <!-- optional=true, 依赖不会传递, 该项目依赖devtools;
-         之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 -->
-        <optional>true</optional>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!-- optional=true, 依赖不会传递, 该项目依赖devtools;
+             之后依赖boot项目的项目如果想要使用devtools, 需要重新引入 -->
+            <optional>true</optional>
         </dependency>
-            <!--okHttp-->
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>3.14.1</version>
-            </dependency>
+        <!--okHttp-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.1</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.58</version>
         </dependency>
-           <!--H2 database-->
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
+        <!--H2 database-->
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.199</version>
-        </dependency>
+        </dependency>-->
         <!--Mybatis-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -83,9 +90,43 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+        </dependency>
+
+        <!-- 云存储-->
+        <dependency>
+            <groupId>cn.ucloud.ufile</groupId>
+            <artifactId>ufile-client-java</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+             <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>
+                        static/**
+                    </exclude>
+                </excludes>
+
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>static/**</include>
+                </includes>
+            </resource>
+
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -96,16 +137,16 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
-                <configuration>
-                    <url>jdbc:h2:~/test</url>
-                    <user>sa</user>
+                <!--<configuration>
+                   <url>jdbc:h2:~/test</url>
+                   <user>sa</user>
                     <password>123</password>
-                </configuration>
+                </configuration>-->
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.197</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.40</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -116,9 +157,9 @@
                 <version>1.3.7</version>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.197</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.40</version>
                     </dependency>
                 </dependencies>
             </plugin>
